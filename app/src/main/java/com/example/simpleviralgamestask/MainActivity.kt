@@ -13,10 +13,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnGenerateDogs.setOnClickListener {
-            startActivity(Intent(this, GenerateDogsScreen::class.java))
-        }
+                startActivity(Intent(this, GenerateDogsScreen::class.java))
+            }
 
-        binding.btnMyGeneratedDogs.setOnClickListener {
+        binding.btnGenerateDogs.setOnClickListener {
             startActivity(Intent(this, MyRecentlyGeneratedDogsScreen::class.java))
         }
     }

@@ -12,9 +12,12 @@ import kotlinx.coroutines.withContext
 
 class MyRecentlyGeneratedDogsScreen : AppCompatActivity() {
     private lateinit var binding: ActivityMyRecentlyGeneratedDogsScreenBinding
-    private lateinit var dogImageCache: DogImageCache
 
     private val generatedDogsAdapter by lazy { GeneratedDogsAdapter() }
+
+    private val dogImageCache: DogImageCache by lazy {
+        DogImageCache.getInstance(applicationContext)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,11 +25,7 @@ class MyRecentlyGeneratedDogsScreen : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.title = resources.getString(R.string.my_recently_generated_dogs)
-
-        dogImageCache = DogImageCache(application)
-
         setupRecyclerView()
-
         binding.btnClearDogs.setOnClickListener {
             clearDogs()
         }
@@ -48,16 +47,13 @@ class MyRecentlyGeneratedDogsScreen : AppCompatActivity() {
     @SuppressLint("NotifyDataSetChanged")
     private fun loadCachedDogImages() {
         lifecycleScope.launch {
-            val cachedDogImages = getAllCachedDogImages()
-            generatedDogsAdapter.setDogImages(cachedDogImages)
-            generatedDogsAdapter.notifyDataSetChanged()
+            val cachedDogImages = dogImageCache.getAllCachedDogImages()
+            withContext(Dispatchers.Main) {
+                generatedDogsAdapter.setDogImages(cachedDogImages)
+                generatedDogsAdapter.notifyDataSetChanged()
+            }
         }
     }
-
-    private suspend fun getAllCachedDogImages(): List<DogImageResponse> =
-        withContext(Dispatchers.IO) {
-            return@withContext dogImageCache.getAllCachedDogImages()
-        }
 
     @SuppressLint("NotifyDataSetChanged")
     private fun clearDogs() {

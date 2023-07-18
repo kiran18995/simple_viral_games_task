@@ -9,8 +9,6 @@ import com.example.simpleviralgamestask.databinding.ActivityGenerateDogsScreenBi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class GenerateDogsScreen : AppCompatActivity() {
     companion object {
@@ -19,13 +17,11 @@ class GenerateDogsScreen : AppCompatActivity() {
         private const val FETCH_IMAGE_ERROR = "Failed to fetch the dog image."
     }
 
-    private lateinit var dogImageCache: DogImageCache
     private lateinit var binding: ActivityGenerateDogsScreenBinding
-    private val dogApiService: DogApiService by lazy {
-        val retrofit = Retrofit.Builder().baseUrl("https://dog.ceo/api/")
-            .addConverterFactory(GsonConverterFactory.create()).build()
+    private val dogApiService: DogApiService by lazy { DogApi.service }
 
-        retrofit.create(DogApiService::class.java)
+    private val dogImageCache: DogImageCache by lazy {
+        DogImageCache.getInstance(applicationContext)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +29,6 @@ class GenerateDogsScreen : AppCompatActivity() {
         binding = ActivityGenerateDogsScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.title = resources.getString(R.string.generate_dogs)
-        dogImageCache = DogImageCache(application)
         binding.btnGenerate.setOnClickListener {
             generateDogImage()
         }
@@ -44,9 +39,9 @@ class GenerateDogsScreen : AppCompatActivity() {
             try {
                 val dogImage = getRandomDogImage()
                 if (dogImage != null) {
+                    dogImageCache.cacheDogImage(dogImage)
                     Glide.with(this@GenerateDogsScreen).load(dogImage.message)
                         .into(binding.ivDogImage)
-                    cacheDogImage(dogImage)
                 } else {
                     Toast.makeText(
                         this@GenerateDogsScreen, FETCH_IMAGE_ERROR, Toast.LENGTH_SHORT
@@ -70,9 +65,5 @@ class GenerateDogsScreen : AppCompatActivity() {
             e.printStackTrace()
         }
         return@withContext null
-    }
-
-    private suspend fun cacheDogImage(dogImage: DogImageResponse) = withContext(Dispatchers.IO) {
-        dogImageCache.cacheDogImage(dogImage)
     }
 }
