@@ -28,6 +28,4 @@ Install the necessary dependencies: <command-to-install-dependencies>
 Run the app on your preferred mobile device or simulator: <command-to-run-app>
 Technologies Used
 The app is built using the following technologies:
-
-Programming Language: Kotlin
-Libraries: Retrofit, Glide
+Kotlin, Retrofit, Glide
