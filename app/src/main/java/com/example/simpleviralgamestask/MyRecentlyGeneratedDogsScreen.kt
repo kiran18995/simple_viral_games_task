@@ -32,11 +32,9 @@ class MyRecentlyGeneratedDogsScreen : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
-        binding.rvGeneratedDogs.apply {
+        binding.generatedDogsList.apply {
             layoutManager = LinearLayoutManager(
-                this@MyRecentlyGeneratedDogsScreen,
-                LinearLayoutManager.HORIZONTAL,
-                false
+                this@MyRecentlyGeneratedDogsScreen, LinearLayoutManager.HORIZONTAL, false
             )
             adapter = generatedDogsAdapter
         }

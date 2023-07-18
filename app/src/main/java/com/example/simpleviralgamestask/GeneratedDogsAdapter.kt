@@ -21,7 +21,8 @@ class GeneratedDogsAdapter : RecyclerView.Adapter<GeneratedDogsAdapter.Generated
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GeneratedDogsViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_dog_poster, parent, false)
+        val itemView =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_dog_poster, parent, false)
         return GeneratedDogsViewHolder(itemView)
     }
 
@@ -36,9 +37,7 @@ class GeneratedDogsAdapter : RecyclerView.Adapter<GeneratedDogsAdapter.Generated
         private val ivDogImage: ImageView = itemView.findViewById(R.id.dog_poster)
 
         fun bind(dogImage: DogImageResponse) {
-            Glide.with(itemView)
-                .load(dogImage.message)
-                .into(ivDogImage)
+            Glide.with(itemView).load(dogImage.message).into(ivDogImage)
         }
     }
 }
