@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Simple Viral Games Task</string>
+    <string name="generate_dogs">Generate Dogs!</string>
+    <string name="my_recently_generated_dogs">My Recently Generated Dogs!</string>
+    <string name="generate">Generate!</string>
+    <string name="dog_image">Dog Image</string>
+    <string name="clear_dogs">Clear Dogs!</string>
+    <string name="dog_poster">Dog poster</string>
+</resources>
