@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center">
+    android:gravity="center"
+    android:orientation="vertical">
 
     <Button
         android:id="@+id/btnGenerateDogs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/button_color"
+        android:padding="16dp"
         android:text="@string/generate_dogs"
-        android:textSize="16sp"
-        android:padding="16dp"/>
+        android:textSize="16sp" />
 
     <Button
         android:id="@+id/btnMyGeneratedDogs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/button_color"
+        android:padding="16dp"
         android:text="@string/my_recently_generated_dogs"
-        android:textSize="16sp"
-        android:padding="16dp"/>
+        android:textSize="16sp" />
 </LinearLayout>

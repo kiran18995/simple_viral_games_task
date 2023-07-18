@@ -21,6 +21,8 @@ class MyRecentlyGeneratedDogsScreen : AppCompatActivity() {
         binding = ActivityMyRecentlyGeneratedDogsScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.title = resources.getString(R.string.my_recently_generated_dogs)
+
         dogImageCache = DogImageCache(application)
 
         setupRecyclerView()

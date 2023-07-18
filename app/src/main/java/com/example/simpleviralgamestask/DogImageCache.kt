@@ -16,18 +16,11 @@ class DogImageCache(application: Application) {
 
     fun cacheDogImage(dogImage: DogImageResponse) {
         val cachedDogImages = getAllCachedDogImages().toMutableList()
-
-        // Remove any existing duplicate image (based on the URL)
         cachedDogImages.removeAll { it.message == dogImage.message }
-
-        // Add the new dog image to the beginning of the list
         cachedDogImages.add(0, dogImage)
-
-        // Trim the list to the maximum cache size
         if (cachedDogImages.size > MAX_CACHE_SIZE) {
             cachedDogImages.removeLast()
         }
-
         saveDogImagesToCache(cachedDogImages)
     }
 
