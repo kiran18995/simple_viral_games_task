@@ -16,13 +16,9 @@ object DogImageCache {
     }
 
     fun getAllCachedDogImages(): List<DogImageResponse> {
-        val cachedDogImages = mutableListOf<DogImageResponse>()
-        for (key in cachedDogImageKeys) {
-            dogImageCache.get(key)?.let {
-                cachedDogImages.add(it)
-            }
+        return cachedDogImageKeys.mapNotNull { key ->
+            dogImageCache.get(key)
         }
-        return cachedDogImages
     }
 
     fun clearCache() {
