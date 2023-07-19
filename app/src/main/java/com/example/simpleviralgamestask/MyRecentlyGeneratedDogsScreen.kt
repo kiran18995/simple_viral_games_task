@@ -15,10 +15,6 @@ class MyRecentlyGeneratedDogsScreen : AppCompatActivity() {
 
     private val generatedDogsAdapter by lazy { GeneratedDogsAdapter() }
 
-    private val dogImageCache: DogImageCache by lazy {
-        DogImageCache.getInstance(applicationContext)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMyRecentlyGeneratedDogsScreenBinding.inflate(layoutInflater)
@@ -45,7 +41,7 @@ class MyRecentlyGeneratedDogsScreen : AppCompatActivity() {
     @SuppressLint("NotifyDataSetChanged")
     private fun loadCachedDogImages() {
         lifecycleScope.launch {
-            val cachedDogImages = dogImageCache.getAllCachedDogImages()
+            val cachedDogImages = DogImageCache.getAllCachedDogImages()
             withContext(Dispatchers.Main) {
                 generatedDogsAdapter.setDogImages(cachedDogImages)
                 generatedDogsAdapter.notifyDataSetChanged()
@@ -56,7 +52,7 @@ class MyRecentlyGeneratedDogsScreen : AppCompatActivity() {
     @SuppressLint("NotifyDataSetChanged")
     private fun clearDogs() {
         lifecycleScope.launch {
-            dogImageCache.clearCache()
+            DogImageCache.clearCache()
             generatedDogsAdapter.clearDogImages()
             generatedDogsAdapter.notifyDataSetChanged()
         }

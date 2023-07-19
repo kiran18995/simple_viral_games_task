@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, GenerateDogsScreen::class.java))
         }
 
-        binding.btnGenerateDogs.setOnClickListener {
+        binding.btnMyGeneratedDogs.setOnClickListener {
             startActivity(Intent(this, MyRecentlyGeneratedDogsScreen::class.java))
         }
     }

@@ -20,10 +20,6 @@ class GenerateDogsScreen : AppCompatActivity() {
     private lateinit var binding: ActivityGenerateDogsScreenBinding
     private val dogApiService: DogApiService by lazy { DogApi.service }
 
-    private val dogImageCache: DogImageCache by lazy {
-        DogImageCache.getInstance(applicationContext)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityGenerateDogsScreenBinding.inflate(layoutInflater)
@@ -39,7 +35,7 @@ class GenerateDogsScreen : AppCompatActivity() {
             try {
                 val dogImage = getRandomDogImage()
                 if (dogImage != null) {
-                    dogImageCache.cacheDogImage(dogImage)
+                    DogImageCache.cacheDogImage(dogImage)
                     Glide.with(this@GenerateDogsScreen).load(dogImage.message)
                         .into(binding.ivDogImage)
                 } else {
