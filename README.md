@@ -22,10 +22,11 @@ This screen displays a scrollable gallery of dog images that are retrieved from 
 
 #### Installation and Usage
 To run the app locally, follow these steps:
-
 Clone the repository: git clone <repository-url>
 Install the necessary dependencies: <command-to-install-dependencies>
 Run the app on your preferred mobile device or simulator: <command-to-run-app>
-Technologies Used
+
+
+#### Technologies Used
 The app is built using the following technologies:
 Kotlin, Retrofit, Glide
